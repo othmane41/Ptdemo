@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <menuitem id="db_transit_parent"
+          name="Puerto Transit" web_icon="dh_transit,static/description/icon2.png"/>
+
+            <menuitem id="db_transit_dossier"
+                      name="Dossier"
+                      parent="db_transit_parent"
+                      action="action_dh_transit_dossier"
+                      sequence="1"/>
+
+            <menuitem id="db_type_interlocuteur"
+                      name="Type Interlocuteur"
+                      parent="contacts.res_partner_menu_config"
+                      action="action_dh_type_interlocuteur"
+                      sequence="1"/>
+
+            <menuitem id="main_menu_configuration_menus" name="Configuration" parent="db_transit_parent" sequence="2"/>
+                <menuitem id="main_menu_douane" name="Dédouane" parent="main_menu_configuration_menus" sequence="1"/>
+                    <menuitem id="main_menu_regimes" name="Régimes" parent="main_menu_douane" action="action_dh_transit_regime" sequence="1"/>
+                    <menuitem id="main_menu_arrondissements" name="Arrondissements" parent="main_menu_douane" action="action_dh_transit_arrondissement" sequence="2"/>
+                    <menuitem id="main_menu_bureaux" name="Bureaux" parent="main_menu_douane" action="action_dh_transit_bureau" sequence="3"/>
+                    <menuitem id="main_menu_lieux_stockage" name="Lieux stockage" parent="main_menu_douane" action="action_dh_transit_lieu_stockage" sequence="4"/>
+
+                <menuitem id="main_menu_transport" name="Transport" parent="main_menu_configuration_menus" sequence="2"/>
+                    <menuitem id="main_menu_mode_transport" name="Mode Transport" parent="main_menu_transport" action="action_dh_transit_mode_transport" sequence="5"/>
+                    <menuitem id="main_menu_type_transport" name="Type Transport" parent="main_menu_transport" action="action_dh_transit_type_transport" sequence="6"/>
+
+                <menuitem id="main_menu_circuit_validation" name="Circuit de validation" parent="main_menu_configuration_menus" sequence="3"/>
+                    <menuitem id="menu_hr_department_config" name="Departments"  parent="main_menu_circuit_validation" action="hr_recruitment.action_hr_department" sequence="7"/>
+                    <menuitem id="menu_crm_team_menu_config_activity_types" name="Activity Types" parent="main_menu_circuit_validation" action="sales_team.mail_activity_type_action_config_sales" sequence="8"/>
+                    <menuitem id="main_menu_etat_tasks" name="Etat Tâche" parent="main_menu_circuit_validation" action="action_dh_etat_tasks" sequence="9"/>
+                    <menuitem id="menu_action_dh_transit_priorite" name="Priorité" parent="main_menu_circuit_validation" action="action_dh_transit_priorite" sequence="10"/>
+
+                <menuitem id="main_menu_taxation" name="Taxation" parent="main_menu_configuration_menus" sequence="4"/>
+                    <menuitem id="main_menu_dh_transit_terminal" name="Terminals" parent="main_menu_taxation" action="action_dh_transit_terminal" sequence="11"/>
+                    <menuitem id="main_menu_dh_transit_unite" name="Types Unité" parent="main_menu_taxation" action="action_dh_transit_unite" sequence="12"/>
+                    <menuitem id="main_menu_dh_transit_sous_unite" name="Types sous unité" parent="main_menu_taxation" action="action_dh_transit_sous_unite" sequence="13"/>
+
+                <menuitem id="main_menu_annexe" name="Annexe" parent="main_menu_configuration_menus" sequence="5"/>
+                    <menuitem id="main_menu_annexations" name="Annexations" parent="main_menu_annexe" action="action_transit_parametre_annexation" sequence="1"/>
+                    <menuitem id="main_menu_type_annexation" name="Type Annexations" parent="main_menu_annexe" action="action_dh_type_annexation" sequence="2"/>
+
+                <menuitem id="main_menu_unite" name="Unité" parent="main_menu_configuration_menus" sequence="6"/>
+                    <menuitem id="main_menu_dh_transit_uom" name="Type de colis-unité de mesur" parent="main_menu_unite" action="action_dh_transit_uom" sequence="15"/>
+
+                <menuitem id="main_menu_facture" name="Facture" parent="main_menu_configuration_menus" sequence="7"/>
+                    <menuitem id="main_menu_mode_paiement" name="Mode Paiement" parent="main_menu_facture" action="action_dh_transit_mode_paiment" sequence="16"/>
+                    <menuitem id="main_dh_station" name="Station" parent="main_menu_facture" action="action_dh_station" sequence="17"/>
+                    <menuitem id="main_dh_contenant" name="contenant" parent="main_menu_facture" action="action_dh_contenant" sequence="18"/>
+
+                <menuitem id="main_menu_charges" name="Charges" parent="main_menu_configuration_menus" sequence="8"/>
+                    <menuitem id="main_parametres_chargese" name="Charges" parent="main_menu_charges" action="action_transit_parametres_charges" sequence="5"/>
+                    <menuitem id="main_parametres_charge_line" name="Line de Charge" parent="main_menu_charges" action="action_transit_parametres_charges_line" sequence="6"/>
+
+                <menuitem id="menu_action_res_city" name="City" parent="contacts.menu_localisation" action="action_res_city" sequence="9"/>
+
+
+
+    </data>
+</odoo>

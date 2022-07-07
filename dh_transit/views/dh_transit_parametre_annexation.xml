@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="dh_transit_parametre_annexation_form">
+        <field name="name">dh.transit.parametre.annexation.form</field>
+        <field name="model">dh.transit.parametre.annexation</field>
+        <field name="arch" type="xml">
+            <form string="Parametres Annexations">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="type_operation"/>
+                            <field name="code_bureau_dedouanement"/>
+                            <field name="code_bureau_destination"/>
+                        </group>
+                        <group>
+                            <field name="code_regime"/>
+                            <field name="mode_transport"/>
+                            <field name="type_transport" domain="[('mode_id', '=', mode_transport)]"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Lignes">
+                            <field name="annexation_lines">
+                                <tree editable="bottom">
+                                    <field name="type"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="dh_transit_parametre_annexation_tree">
+        <field name="name">dh.transit.parametre.annexation.tree</field>
+        <field name="model">dh.transit.parametre.annexation</field>
+        <field name="arch" type="xml">
+            <tree string="Parametres Annexations">
+                <field name="name"/>
+                <field name="type_operation"/>
+                <field name="code_bureau_dedouanement"/>
+                <field name="code_bureau_destination"/>
+                  <field name="code_regime"/>
+                <field name="mode_transport"/>
+                <field name="type_transport"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_transit_parametre_annexation" model="ir.actions.act_window">
+        <field name="name">Parametres annexations</field>
+        <field name="res_model">dh.transit.parametre.annexation</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+</odoo>

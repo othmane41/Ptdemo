@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="dh_etat_tasks_form_view">
+        <field name="name">dh.etat.tasks.form</field>
+        <field name="model">dh.etat.tasks</field>
+        <field name="arch" type="xml">
+            <form string="Etat Tâches">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+     <record model="ir.ui.view" id="dh_etat_tasks_tree_view">
+        <field name="name">dh.etat.tasks.tree</field>
+        <field name="model">dh.etat.tasks</field>
+        <field name="arch" type="xml">
+            <tree string="Etats Tâches">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+	<record id="action_dh_etat_tasks" model="ir.actions.act_window">
+		<field name="name">Etats Tâches</field>
+		<field name="res_model">dh.etat.tasks</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+
+</odoo>

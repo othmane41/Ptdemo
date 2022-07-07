@@ -1,0 +1,96 @@
+<odoo>
+    <data>
+
+        <record id="mail_transit_dossier" model="mail.template">
+            <field name="name">les articles a Confirmer</field>
+            <field name="model_id" ref="model_dh_transit_dossier"/>
+            <field name="subject">
+                Liste des charges supplémentaires
+            </field>
+            <field name="body_html" type="html">
+                <div>
+
+
+                    <strong>Bonjour,
+                        <t t-esc="object.client_facturation.display_name"></t>
+                    </strong>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <t t-set="key_transit_dossier" t-value="ctx.get('key_transit_dossier')"/>
+                    <t t-set="Creator_user" t-value="ctx.get('Creator_user')"/>
+                    <t t-if="key_transit_dossier">
+                        Le dossier
+                        <strong>
+                            <t t-esc="object.display_name"></t>
+                        </strong>
+<!--                        contients des charges ne sont pas dans votre contrat , merci de confirmer ses charges avec le-->
+<!--                        responsable-->
+                        necessite votre confirmation car des charges supplementaires ont ete generes sur votre dossier
+<!--                        <span t-esc="Creator_user.name"/>-->
+                        <br/>
+                        <br/>
+                       <strong> Merci de trouver ci-apres la liste des charges supplémentaires :</strong>
+                        <br/>
+                        <t t-if="len(key_transit_dossier) > 0">
+
+                            <br/>
+                            <table style="border: 1px solid black;" width="50%">
+
+                                <tr style="border: 1px solid black; ">
+                                    <td style="border: 1px solid black;">
+                                        <strong><center>Article</center></strong>
+                                    </td>
+                                    <td style="border: 1px solid black;">
+                                       <strong> <center>Désignation</center></strong>
+                                    </td>
+                                    <td style="border: 1px solid black;">
+                                       <strong> <center>Quantite</center></strong>
+                                    </td>
+                                    <td style="border: 1px solid black;">
+                                        <strong><center>PU</center></strong>
+                                    </td>
+                                    <td style="border: 1px solid black;">
+                                        <strong><center>Montant</center></strong>
+                                    </td>
+                                </tr>
+
+
+                                <t t-foreach="key_transit_dossier" t-as="bs">
+                                    <tr style="border: 1px solid black; ">
+                                        <td  align="left" style="border: 1px solid black; ">
+                                            <span t-esc="bs.product_id.name"/>
+                                        </td>
+                                        <td  align="left" style="border: 1px solid black; ">
+                                            <span t-esc="bs.prestation"/>
+                                        </td>
+                                        <td   align="right" style="border: 1px solid black; ">
+                                            <span t-esc="bs.quantity"/>
+                                        </td>
+                                        <td  align="right" style="border: 1px solid black; ">
+                                            <span t-esc="bs.prix_unitaire"/>
+                                        </td>
+                                        <td  align="right" style="border: 1px solid black; ">
+                                            <span t-esc="bs.amount_total"/>
+                                        </td>
+                                    </tr>
+
+                                </t>
+                            </table>
+                        </t>
+
+
+                    </t>
+
+
+                    <br/>
+                    <strong></strong>
+
+                    <br/>
+                </div>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

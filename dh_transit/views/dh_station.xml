@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="dh_station_form">
+        <field name="name">dh.station.form</field>
+        <field name="model">dh.station</field>
+        <field name="arch" type="xml">
+            <form string="Station">
+                <sheet>
+                    <group>
+                        <field name="nom"/>
+                    </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="dh_station_tree">
+        <field name="name">dh.station.tree</field>
+        <field name="model">dh.station</field>
+        <field name="arch" type="xml">
+            <tree string="Station">
+                <field name="nom"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_dh_station" model="ir.actions.act_window">
+        <field name="name">Station</field>
+        <field name="res_model">dh.station</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+</odoo>

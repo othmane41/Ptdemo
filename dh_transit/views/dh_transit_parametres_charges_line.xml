@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record model="ir.ui.view" id="transit_parametres_charges_line_tree">
+        <field name="name">transit.parametres.charges.line</field>
+        <field name="model">dh.transit.parametres.charges.line</field>
+        <field name="arch" type="xml">
+            <tree string="charges line" create="false"  editable="bottom">
+                <field name="product_id"/>
+                <field name="prix"/>
+                <field name="name"/>
+                <field name="type_declaration"/>
+                <field name="code_bureau_dedouanement"/>
+                <field name="code_regime"/>
+                <field name="code_bureau_destination"/>
+                <field name="client_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_transit_parametres_charges_line" model="ir.actions.act_window">
+        <field name="name">Charges</field>
+        <field name="res_model">dh.transit.parametres.charges.line</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+
+</odoo>

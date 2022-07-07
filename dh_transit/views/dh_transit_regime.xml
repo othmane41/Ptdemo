@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="dh_transit_regime_form_view">
+        <field name="name">dh.transit.regime.form</field>
+        <field name="model">dh.transit.regime</field>
+        <field name="arch" type="xml">
+            <form string="Régime">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                        </group>
+                        <group>
+                            <field name="description"/>
+                            <field name="type"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+     <record model="ir.ui.view" id="dh_transit_regime_tree_view">
+        <field name="name">dh.transit.regime.tree</field>
+        <field name="model">dh.transit.regime</field>
+        <field name="arch" type="xml">
+            <tree string="Régimes">
+                <field name="code"/>
+                <field name="description"/>
+                <field name="type"/>
+            </tree>
+        </field>
+    </record>
+
+	<record id="action_dh_transit_regime" model="ir.actions.act_window">
+		<field name="name">Régimes</field>
+		<field name="res_model">dh.transit.regime</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+
+</odoo>

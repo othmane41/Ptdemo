@@ -1,0 +1,456 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="dh_transit_form">
+            <field name="name">Transit Dossier form</field>
+            <field name="model">dh.transit.dossier</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_importer_facture" string="Importer Facture" type="object"/>
+                        <button name="button_confirmation_client" string="Confirmer" type="object" attrs="{'invisible': [('statut', '!=', 'att_confirm')]}"/>
+                        <field name="statut" widget="statusbar"
+                               statusbar_visible="nouveau,pret,encours_traitement,encours_dedouanement,dedouanement_acheve,doc_rem_transporteur"/>
+                        <button name="button_encours_dedouanement" string="En Dedouanement" type="object" attrs="{'invisible': [('statut', '=', 'att_confirm')]}"/>
+                        <button name="button_dedouanement_acheve" string="Dedouanement Acheve" type="object" attrs="{'invisible': [('statut', '=', 'att_confirm')]}"/>
+                        <button name="button_doc_rem_transporteur" string="Documents remis au transporteur" type="object" attrs="{'invisible': [('statut', '=', 'att_confirm')]}"/>
+
+                    </header>
+                    <sheet>
+                        <!--            <field name="progress" widget="progressbar" style="float:right; margin-top: -1%;"/>-->
+                        <div>
+                            <div class="oe_title">
+                                <label class="oe_edit_only" for="num_dossier"/>
+                                <h1>
+                                    <field name="priority" widget="priority" class="mr-3"/>
+                                    <field name="num_dossier" placeholder="N° de dossier" readonly="1"/>
+                                </h1>
+                            </div>
+                        </div>
+                        <group col="3">
+                            <group>
+                                <field name="parent_id"/>
+                                <field name="type_dossier" required="1"/>
+                                <field name="client_facturation"  attrs="{'required': [('type_dossier', '=', 'definitif')]}"/>
+                                <field name="soumissionnaire" domain="[('is_soumissionnaire', '=', True)]" context="{'default_is_soumissionnaire': True}"
+                                       attrs="{'required': [('type_dossier', '=', 'definitif')]}"/>
+                                <field name="n_serie" attrs="{'required': [('type_dossier', '=', 'definitif')]}"/>
+                                <field name="code_regime" attrs="{'required': [('type_dossier', '=', 'definitif')]}"/>
+                                <field name="type_activite"/>
+                            </group>
+                            <group>
+                                <field name="code_bureau_dedouanement"
+                                       attrs="{'required': [('type_dossier', '=', 'definitif')]}"/>
+                                <field name="code_bureau_destination"
+                                       attrs="{'required': [('type_dossier', '=', 'definitif')]}"/>
+                                <field name="code_arrondissement"
+                                       attrs="{'required': [('type_dossier', '=', 'definitif')]}"/>
+                                <field name="code_lieu_stockage"
+                                       attrs="{'required': [('type_dossier', '=', 'definitif')]}"
+                                       domain="[('code_bureau', '=', code_bureau_destination)]"/>
+                            </group>
+                            <group>
+                                <field name="n_dum"
+                                       attrs="{'required': [('type_dossier', '=', 'definitif'), ('type_declaration', '!=', 'normale')]}"/>
+                                <field name="date_start_dum"
+                                       attrs="{'required': [('type_dossier', '=', 'definitif')]}"/>
+                                <field name="date_end_dum" attrs="{'required': [('type_dossier', '=', 'definitif')]}"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Détail du Dossier">
+                                <group col="3">
+                                    <group string="Déclaration">
+                                        <field name="n_sous_dum"
+                                               attrs="{'required': [('type_dossier', '=', 'definitif'), ('type_declaration', '!=', 'nouvelle')]}"/>
+                                        <field name="type_declaration"
+                                               attrs="{'required': [('type_dossier', '=', 'definitif')]}"/>
+                                        <field name="date_heure_operation"/>
+                                    </group>
+                                    <group string="Manifeste">
+
+                                        <div class="row col-12">
+                                            <label for="num_manifeste" class='font-weight-bold'/>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                            <field name="num_manifeste"
+                                           attrs="{'required': [('type_dossier', '=', 'definitif')]}" class="col-md-8"/>
+                                            <label for="origine_marchandise" class='font-weight-bold'/>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                            <field nolabel="1" class="oe_link oe_inline" name="origine_image_url" widget="image_url" options='{"size": [16, 16]}'/>
+                                            <field name="origine_marchandise"
+                                                   attrs="{'required': [('type_dossier', '=', 'definitif')]}" class="col-md-8"/>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                            <label for="provenance" class='font-weight-bold'/>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                            <field nolabel="1" class="oe_link oe_inline"  name="provenance_image_url" widget="image_url" options='{"size": [16, 16]}'/>
+                                            <field name="provenance"
+                                                   attrs="{'required': [('type_dossier', '=', 'definitif')]}" class="col-md-8"/>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+
+                                        </div>
+                                    </group>
+                                    <group string="Véhicule">
+                                        <field name="matricule"
+                                               attrs="{'required': [('type_dossier', '=', 'definitif')]}"/>
+                                        <field name="marque"
+                                               attrs="{'required': [('type_dossier', '=', 'definitif')]}"/>
+                                        <field name="ref_transporteur"
+                                               attrs="{'required': [('type_dossier', '=', 'definitif')]}"/>
+                                    </group>
+                                    <group col="1">
+                                        <group string="Marchandise">
+                                            <field name="article_id"
+                                                   attrs="{'required': [('type_dossier', '=', 'definitif')]}"/>
+                                            <field name="expediteur"
+                                                   attrs="{'required': [('type_dossier', '=', 'definitif')]}"/>
+                                            <field name="destinataire"
+                                                   attrs="{'required': [('type_dossier', '=', 'definitif')]}"/>
+                                            <field name="poids_brut"
+                                                   attrs="{'required': [('type_dossier', '=', 'definitif')]}"/>
+                                            <field name="nbr_colis"/>
+                                            <field name="nbr_palette"/>
+                                            <field name="observation"
+                                                   attrs="{'required': [('type_dossier', '=', 'definitif')]}"/>
+                                        </group>
+                                    </group>
+                                    <group col="1">
+                                        <group string="Transport">
+                                            <field name="mode_transport"
+                                                   attrs="{'required': [('type_dossier', '=', 'definitif')]}"/>
+                                            <field name="is_maritime" invisible="1"/>
+                                            <field name="ref_transport"
+                                                   attrs="{'required': [('type_dossier', '=', 'definitif')]}"/>
+
+                                            <field name="date_voyage"
+                                                   attrs="{'required': [('type_dossier', '=', 'definitif')]}"/>
+                                            <field name="num_connaissement"
+                                                   attrs="{'required': [('type_dossier', '=', 'definitif')]}"/>
+                                            <field name="type_transport" domain="[('mode_id', '=', mode_transport)]"
+                                                   attrs="{'required': [('type_dossier', '=', 'definitif')]}"/>
+                                            <field name="compagnie_maritime" domain="[('is_maritime', '=', True)]" context="{'default_is_maritime': True}"
+                                                   attrs="{'invisible': [('is_maritime', '!=', True)], 'required': [('is_maritime', '=', True)]}"/>
+                                            <field name="transporteur" domain="[('is_transporteur','=',True)]" context="{'default_is_transporteur': True}"
+                                                   attrs="{'required': [('type_dossier', '=', 'definitif')]}"/>
+                                            <field name="type_contenant"
+                                                   attrs="{'required': [('type_dossier', '=', 'definitif')]}"/>
+                                            <field name="ref_compagnie"
+                                                   attrs="{'invisible': [('is_maritime', '!=', True)],'required': [('is_maritime', '=', True)]}"/>
+                                        </group>
+                                    </group>
+                                    <group col="1">
+                                        <group string="Info complémentaires">
+                                            <field name="bureau_concerne"/>
+                                            <field name="pince"/>
+                                            <field name="commentaire"/>
+                                            <field name="is_tr"/>
+                                            <field name="num_tr"
+                                                   attrs="{'invisible': [('is_tr', '=', False)]}"/> <!--attrs="{'invisible': [('is_tr', '=', False)]}"-->
+                                            <field name="ref_tr"
+                                                   attrs="{'invisible': [('is_tr', '=', False)]}"/> <!--attrs="{'invisible': [('is_tr', '=', False)]}"-->
+                                            <field name="date_tr"
+                                                   attrs="{'invisible': [('is_tr', '=', False)]}"/> <!--attrs="{'invisible': [('is_tr', '=', False)]}"-->
+                                            <field name="is_scelle_douane"/>
+                                            <!--                        <group>-->
+                                            <field name="num_scelle_douane"
+                                                   attrs="{'invisible': [('is_scelle_douane', '=', False)], 'readonly': [('is_scelle_douane', '=', False)]}"/>
+                                            <!--                        </group>-->
+                                            <br/>
+                                            <field name="is_scelle_client"/>
+                                            <!--                        <group>-->
+                                            <field name="num_scelle_client"
+                                                   attrs="{'invisible': [('is_scelle_client', '=', False)], 'readonly': [('is_scelle_client', '=', False)]}"/>
+                                            <!--                        </group>-->
+                                            <field name="document_ids" widget="many2many_binary"
+                                                   attrs="{'required': [('type_dossier', '=', 'definitif')]}"/>
+                                        </group>
+                                    </group>
+                                </group>
+                                <!--                <group col="3" string="Info complémentaires">-->
+                                <!--                  <group>-->
+
+                                <!--                  </group>-->
+                                <!--                  <group>-->
+
+                                <!--                  </group>-->
+                                <!--                  <group>-->
+
+                                <!--                  </group>-->
+                                <!--                </group>-->
+                                <group col="3" string="Taxation">
+                                    <group>
+                                        <field name="sens_taxation"
+                                               attrs="{'required': [('type_dossier', '=', 'definitif')]}"/>
+                                        <field name="terminal_id"
+                                               attrs="{'required': [('type_dossier', '=', 'definitif')]}"/>
+                                        <field name="nature"
+                                               attrs="{'required': [('type_dossier', '=', 'definitif')]}"/>
+                                    </group>
+                                    <group>
+
+                                        <field name="type_unite"
+                                               attrs="{'required': [('type_dossier', '=', 'definitif')]}"/>
+                                        <field name="type_sous_unite" domain="[('unit_type_id', '=', type_unite)]"
+                                               attrs="{'required': [('type_dossier', '=', 'definitif')]}"/>
+                                    </group>
+                                    <group>
+                                        <field name="n_unite"
+                                               attrs="{'required': [('type_dossier', '=', 'definitif')]}"/>
+                                        <field name="n_tracteur"
+                                               attrs="{'required': [('type_dossier', '=', 'definitif')]}"/>
+                                        <field name="n_plateau"
+                                               attrs="{'required': [('type_dossier', '=', 'definitif')]}"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Détails charges">
+                                <field name="charge_ids">
+                                    <tree decoration-danger="est_charge_client==False" delete="0">
+                                        <field name="date_piece"/>
+                                        <field name="n_piece"/>
+                                        <field name="n_service"/>
+                                        <field name="product_id"/>
+                                        <field name="prestataire" domain="[('is_prestataire', '=', True)]" context="{'default_is_prestataire': True}"/>
+                                        <field name="prestation"/>
+                                        <field name="prix_unitaire"/>
+                                        <field name="quantity"/>
+                                        <field name="amount_total"/>
+                                        <field name="code_devise"/>
+                                        <field name="est_charge_client" invisible="1"/>
+                                        <button name="delete_charge"  type="object" confirm="Les documents annexés liés seront supprimés" icon="fa-trash-o"/>
+                                    </tree>
+                                    <form>
+                                        <group col="3" string="FACTURE">
+                                            <group>
+                                                <field name="date_piece"/>
+                                                <field name="n_piece"/>
+                                                <field name="n_service"/>
+                                            </group>
+                                            <group>
+                                                <field name="product_id"/>
+                                                <field name="prestataire"/>
+                                                <field name="prestation"/>
+                                            </group>
+                                            <group>
+                                                <field name="prix_unitaire"/>
+                                                <field name="quantity"/>
+                                                <field name="amount_total"/>
+                                                <field name="code_devise"/>
+                                            </group>
+
+                                        </group>
+                                        <notebook>
+                                        <page string="lignes charges">
+                                            <field name="line_ids">
+                                                <tree editable="bottom" decoration-danger="est_charge_client==False" delete="0">
+                                                    <field name="date_piece"/>
+                                                    <field name="n_piece"/>
+                                                    <field name="n_service"/>
+                                                    <field name="product_id"/>
+                                                    <field name="prestataire" domain="[('is_prestataire', '=', True)]" context="{'default_is_prestataire': True}"/>
+                                                    <field name="prestation"/>
+                                                    <field name="prix_unitaire"/>
+                                                    <field name="quantity"/>
+                                                    <field name="amount_total"/>
+                                                    <field name="code_devise"/>
+                                                    <field name="est_charge_client" invisible="1"/>
+                                                    <field name="dh_transit_docs_id" invisible="1"/>
+                                                    <button name="delete_charge_line"  type="object" icon="fa-trash-o" confirm="Les documents annexés liés seront supprimés"/>
+                                                </tree>
+                                            </field>
+
+                                        </page>
+                                        </notebook>
+                                    </form>
+                                </field>
+                                <group>
+                                    <group>
+                                        <field name="charges_disable_auto"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Liste factures">
+                                <field name="dh_transit_facture_ids">
+                                    <tree>
+                                        <field name="date_facture"/>
+                                        <field name="n_facture"/>
+                                        <field name="fournisseur_id"/>
+                                        <field name="destinatire_id"/>
+                                        <field name="producteur_id" domain="[('is_producteur', '=', True)]" context="{'default_is_producteur': True}"/>
+                                        <field name="station_id"/>
+                                        <field name="incoterm"/>
+                                        <field name="mode_paiement" optional="hide"/>
+                                        <field name="contenant_id"/>
+                                        <field name="poids_brut_total" optional="hide"/>
+                                        <field name="poids_net_total" optional="hide"/>
+                                        <field name="code_devise"/>
+                                        <field name="total_facture"/>
+
+                                        <field name="rate"/>
+                                    </tree>
+                                    <form>
+                                        <group col="3" string="PRODUCTEUR">
+                                            <group>
+                                                <field name="producteur_id"/>
+                                            </group>
+                                            <group>
+                                                <field name="station_id"/>
+                                            </group>
+                                            <group>
+
+                                            </group>
+                                        </group>
+                                        <group col="3" string="FACTURE">
+                                            <group>
+                                                <field name="date_facture"/>
+                                                <field name="fournisseur_id"/>
+                                                <field name="code_devise"/>
+                                                <field name="incoterm"/>
+                                                <field name="poids_brut_total"/>
+
+                                            </group>
+                                            <group>
+                                                <field name="n_facture"/>
+                                                <field name="destinatire_id"/>
+                                                <field name="rate"/>
+                                                <field name="mode_paiement"/>
+                                                <field name="poids_net_total"/>
+                                            </group>
+                                            <group>
+                                                <field name="contenant_id"/>
+                                                <field name="total_facture"/>
+                                            </group>
+
+                                        </group>
+                                        <notebook>
+                                        <page string="ligne factures">
+                                            <field name="dh_transit_facture_line_ids">
+                                                <tree editable="bottom">
+                                                    <field name="code_ngp"/>
+                                                    <field name="code_article_expediteur"/>
+                                                    <field name="code_article_destinataire"/>
+                                                    <field name="designation_commerciale"/>
+                                                    <field name="unite_mesure"/>
+                                                    <field name="quantite"/>
+                                                    <field name="poids_net"/>
+                                                    <field name="valeur"/>
+                                                    <field name="code_pays_id"/>
+                                                </tree>
+                                            </field>
+
+                                        </page>
+                                        </notebook>
+
+
+                                    </form>
+                                </field>
+                            </page>
+                            <page string="Documents annexés">
+                                <field name="docs_annexe_ids">
+                                    <tree editable="bottom" delete="0">
+                                        <field name="charge_id" invisible="1"/>
+                                        <field name="charge_line_id" invisible="1"/>
+                                        <field name="date_annexation"/>
+                                        <field name="heure_annexation" widget="float_time"/>
+                                        <field name="type_annexation"/>
+                                        <field name="nom_doc_annexe"/>
+                                        <field name="attachment_ids" widget="many2many_binary" optional="show" class="oe_edit_only"/>
+                                        <field name="url" widget="html" optional="show" readonly="1"/>
+                                        <field name="commentaire" optional="hide"/>
+                                        <field name="create_uid" string="Crée par"/>
+<!--                                        <field name="worksheet_type" widget="selection" optional="hide"/>-->
+<!--                                        <field name="worksheet" help="Upload your PDF file." widget="pdf_viewer"-->
+<!--                                               attrs="{'invisible':  [('worksheet_type', '!=', 'pdf')], 'required':  [('worksheet_type', '=', 'pdf')]}"-->
+<!--                                               optional="hide"/>-->
+<!--                                        <field name="worksheet_google_slide" placeholder="Google Slide Link"-->
+<!--                                               widget="url"-->
+<!--                                               attrs="{'invisible':  [('worksheet_type', '!=', 'google_slide')], 'required': [('worksheet_type', '=', 'google_slide')]}"-->
+<!--                                               optional="hide"/>-->
+<!--                                        <button name="button_url" string="file" type="object"/>-->
+                                        <button name="delete_doc"  type="object" icon="fa-trash-o" confirm="Les charges liés seront supprimés"/>
+
+                                    </tree>
+                                </field>
+                                <group>
+                                    <group>
+                                        <field name="annexe_disable_auto"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Circuit de validation">
+                                <field name="dh_transit_circuit_validation_ids">
+                                    <tree editable="bottom">
+                                        <field name="department_id"/>
+                                        <field name="utilisateur_affcter_id" domain="[('employee_id.department_id', '=', department_id)]"/>
+                                        <field name="intitule_tache_ids" /> <!--widget="many2many_tags"-->
+                                        <field name="priorite_id"/>
+                                        <field name="date_affectation"/>
+                                        <field name="heure_affectation" widget="float_time" optional="hide"/>
+                                        <field name="createur_tache_id" optional="hide"/>
+                                        <field name="etape_encours" optional="hide"/>
+                                        <field name="etat_tache" optional="hide"/>
+                                        <field name="commentaire" optional="hide"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <sheet>
+                        <div class="oe_chatter">
+                            <field name="message_follower_ids" widget="mail_followers"/>
+                            <field name="activity_ids" widget="mail_activity"/>
+                            <field name="message_ids" widget="mail_thread"/>
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="dh_transit_list">
+            <field name="name">Transit Dossier list</field>
+            <field name="model">dh.transit.dossier</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="num_dossier" optional="show"/>
+                    <field name="type_dossier" optional="show"/>
+                    <field name="date_start_dum" optional="show"/>
+                    <field name="date_end_dum" optional="show"/>
+                    <field name="n_dum" optional="show"/>
+                    <field name="n_sous_dum" optional="show"/>
+                    <field name="expediteur" optional="show"/>
+                    <field name="destinataire" optional="show"/>
+                    <field name="code_bureau_dedouanement" optional="show"/>
+                    <field name="code_arrondissement" optional="show"/>
+                    <field name="code_bureau_destination" optional="show"/>
+                    <field name="code_lieu_stockage" optional="show"/>
+                    <field name="create_date" string="Date de création" optional="show"/>
+                    <field name="create_uid" string="Crée par" optional="show"/>
+                    <field name="write_date" string="Date de modification" optional="hide"/>
+                    <field name="write_uid" string="Modifié par" optional="hide"/>
+                    <field name="statut" optional="show"/>
+                    <field name="priority" optional="show"/>
+                    <field name="progress" widget="progressbar" optional="show"/>
+                    <field name="type_declaration" optional="show"/>
+                    <field name="transporteur" optional="show"/>
+                    <field name="date_voyage" optional="show"/>
+                    <field name="num_manifeste" optional="hide"/>
+                    <field name="ref_tr" optional="hide"/>
+                    <field name="poids_brut" optional="hide"/>
+                    <field name="nbr_colis" optional="hide"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="dossier_pivot" model="ir.ui.view">
+            <field name="name">dh.transit.dossier.pivot</field>
+            <field name="model">dh.transit.dossier</field>
+            <field name="arch" type="xml">
+                <pivot string="Dossiers">
+                    <field name="num_dossier" type="row"/>
+                    <field name="statut" type="col"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_dh_transit_dossier">
+            <field name="name">Transit Dossier</field>
+            <field name="res_model">dh.transit.dossier</field>
+            <field name="view_mode">tree,form,pivot</field>
+        </record>
+
+    </data>
+</odoo>

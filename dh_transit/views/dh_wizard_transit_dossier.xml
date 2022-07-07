@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="dh_wizard_transit_dossier_form_post">
+        <field name="name">dh.wizard.transit.dossier.form</field>
+        <field name="model">dh.wizard.transit.dossier</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <sheet>
+                <group>
+                    <field name="dossier_parent_id"/>
+
+                </group>
+            </sheet>
+
+            <footer>
+                    <button string="Modifier" name="write_transit_dossier" type="object"/>
+                    <button special="cancel" string="Annuler"/>
+            </footer>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_dh_wizard_transit_dossier_wizard">
+        <field name="name"> wizard Action</field>
+        <field name="res_model">dh.wizard.transit.dossier</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="dh_wizard_transit_dossier_form_post"/>
+    </record>
+
+    <record id="action_cps_hr_attendance" model="ir.actions.server">
+        <field name="name">Modifier Dossier Parent</field>
+        <field name="model_id" ref="model_dh_transit_dossier"/>
+        <field name="binding_model_id" ref="model_dh_transit_dossier"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">
+            if records:
+                action_values = env.ref('dh_transit.action_dh_wizard_transit_dossier_wizard').read()[0]
+                action_values.update({'context': env.context})
+                action = action_values
+
+        </field>
+    </record>
+
+
+</odoo>

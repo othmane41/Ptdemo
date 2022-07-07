@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="dh_contenant_form">
+        <field name="name">dh.contenant.form</field>
+        <field name="model">dh.contenant</field>
+        <field name="arch" type="xml">
+            <form string="contenant">
+                <sheet>
+                    <group>
+                        <field name="nom"/>
+                    </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="dh_contenant_tree">
+        <field name="name">dh.contenant.tree</field>
+        <field name="model">dh.contenant</field>
+        <field name="arch" type="xml">
+            <tree string="contenant">
+                <field name="nom"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_dh_contenant" model="ir.actions.act_window">
+        <field name="name">contenant</field>
+        <field name="res_model">dh.contenant</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+</odoo>

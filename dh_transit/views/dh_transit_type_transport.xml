@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="dh_transit_type_transport_form_view">
+        <field name="name">dh.transit.type.transport.form</field>
+        <field name="model">dh.transit.type.transport</field>
+        <field name="arch" type="xml">
+            <form string="Type Transport">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="mode_id"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+     <record model="ir.ui.view" id="dh_transit_type_transport_tree_view">
+        <field name="name">dh.transit.type.transport.tree</field>
+        <field name="model">dh.transit.type.transport</field>
+        <field name="arch" type="xml">
+            <tree string="Types Transport">
+                <field name="name"/>
+                <field name="mode_id"/>
+            </tree>
+        </field>
+    </record>
+
+	<record id="action_dh_transit_type_transport" model="ir.actions.act_window">
+		<field name="name">Types Transport</field>
+		<field name="res_model">dh.transit.type.transport</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+
+</odoo>

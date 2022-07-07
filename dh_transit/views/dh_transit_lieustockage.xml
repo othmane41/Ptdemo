@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="dh_transit_lieu_stockage_form_view">
+        <field name="name">dh.transit.lieu.stockage.form</field>
+        <field name="model">dh.transit.lieu.stockage</field>
+        <field name="arch" type="xml">
+            <form string="Lieu Stockage">
+                <sheet>
+                    <group col="2">
+                        <group>
+                            <field name="code_stockage"/>
+                            <field name="code_bureau"/>
+                        </group>
+                        <group>
+                            <field name="lieu_stockage" domain="[('type', '=', 'delivery')]"/>
+                            <field name="description_bureau"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+     <record model="ir.ui.view" id="dh_transit_lieu_stockage_tree_view">
+        <field name="name">dh.transit.lieu.stockage.tree</field>
+        <field name="model">dh.transit.lieu.stockage</field>
+        <field name="arch" type="xml">
+            <tree string="Lieux Stockage">
+                <field name="code_stockage"/>
+                <field name="lieu_stockage"/>
+            </tree>
+        </field>
+    </record>
+
+	<record id="action_dh_transit_lieu_stockage" model="ir.actions.act_window">
+		<field name="name">Lieux Stockage</field>
+		<field name="res_model">dh.transit.lieu.stockage</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+
+</odoo>

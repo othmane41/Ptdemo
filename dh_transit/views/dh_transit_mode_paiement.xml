@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="dh_transit_mode_paiment">
+        <field name="name">dh.transit.mode.paiement.form</field>
+        <field name="model">dh.transit.mode.paiement</field>
+        <field name="arch" type="xml">
+            <form string="Mode Paiment">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="mode_paiment"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="dh_transit_mode_paiment">
+        <field name="name">dh.transit.mode.paiement.tree</field>
+        <field name="model">dh.transit.mode.paiement</field>
+        <field name="arch" type="xml">
+            <tree string="Mode Paiment">
+                <field name="mode_paiment"/>
+
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_dh_transit_mode_paiment" model="ir.actions.act_window">
+        <field name="name">Mode Paiment</field>
+        <field name="res_model">dh.transit.mode.paiement</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+</odoo>

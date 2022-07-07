@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="dh_transit_uom_tree">
+        <field name="name">dh.transit.uom.form</field>
+        <field name="model">dh.transit.uom</field>
+        <field name="arch" type="xml">
+            <form string="Type de colis-unité de mesur">
+                <sheet>
+                    <group>
+                        <field name="code_unite"/>
+                        <field name="intitule_unite"/>
+                        <field name="type_colis"/>
+                    </group>
+
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="dh_transit_uom_form">
+        <field name="name">dh.transit.uom.tree</field>
+        <field name="model">dh.transit.uom</field>
+        <field name="arch" type="xml">
+            <tree string="Type de colis-unité de mesur">
+                <field name="code_unite"/>
+                <field name="intitule_unite"/>
+                <field name="type_colis"/>
+
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_dh_transit_uom" model="ir.actions.act_window">
+        <field name="name">Type de colis-unité de mesur</field>
+        <field name="res_model">dh.transit.uom</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+</odoo>

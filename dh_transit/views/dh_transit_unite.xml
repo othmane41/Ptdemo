@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="dh_transit_unite_dh_form">
+        <field name="name">dh.transit.unite.form</field>
+        <field name="model">dh.transit.unite</field>
+        <field name="arch" type="xml">
+            <form string="Type unité">
+                    <sheet>
+                    <group>
+                        <group>
+                           <field name="type_unite"/>
+                            <field name="sous_type_unite" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                </sheet>
+
+
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="dh_transit_unite_tree">
+        <field name="name">dh.transit.unite.tree</field>
+        <field name="model">dh.transit.unite</field>
+        <field name="arch" type="xml">
+            <tree string="Types unité">
+                <field name="type_unite"/>
+                <field name="sous_type_unite" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_dh_transit_unite" model="ir.actions.act_window">
+        <field name="name">Types unité</field>
+        <field name="res_model">dh.transit.unite</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!--    #############################################################################-->
+
+    <record model="ir.ui.view" id="dh_transit_sous_unite_form">
+        <field name="name">dh.transit.sous.unite.form</field>
+        <field name="model">dh.transit.sous.unite</field>
+        <field name="arch" type="xml">
+            <form string="Type sous unite">
+                <sheet>
+                    <group>
+                        <group>
+                           <field name="type_unite"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="dh_transit_sous_unite_tree">
+        <field name="name">dh.transit.sous.unite.tree</field>
+        <field name="model">dh.transit.sous.unite</field>
+        <field name="arch" type="xml">
+            <tree string="Types sous unité">
+                <field name="type_unite"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_dh_transit_sous_unite" model="ir.actions.act_window">
+        <field name="name">Types sous unité</field>
+        <field name="res_model">dh.transit.sous.unite</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

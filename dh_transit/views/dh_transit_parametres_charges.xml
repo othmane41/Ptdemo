@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="dh_transit_parametres_charges_form">
+        <field name="name">dh.transit.parametres.charges.form</field>
+        <field name="model">dh.transit.parametres.charges</field>
+        <field name="arch" type="xml">
+            <form string="Parametres Charges">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="type_declaration"/>
+                            <field name="code_bureau_dedouanement"/>
+                            <field name="code_regime"/>
+                        </group>
+                        <group>
+                            <field name="code_bureau_destination"/>
+                            <field name="client_id"/>
+                        </group>
+                    </group>
+                     <field name="parametres_charges_line_ids">
+                        <tree editable="bottom">
+                            <field name="product_id"/>
+                            <field name="prix"/>
+                        </tree>
+                </field>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="dh_transit_parametres_charges_tree">
+        <field name="name">dh.transit.parametres.charges.tree</field>
+        <field name="model">dh.transit.parametres.charges</field>
+        <field name="arch" type="xml">
+            <tree string="Parametres Charges">
+                <field name="name"/>
+                <field name="type_declaration"/>
+                <field name="code_bureau_dedouanement"/>
+                <field name="code_regime"/>
+                  <field name="code_bureau_destination"/>
+                <field name="client_id"/>
+
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_transit_parametres_charges" model="ir.actions.act_window">
+        <field name="name">Parametres Charges</field>
+        <field name="res_model">dh.transit.parametres.charges</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+</odoo>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="dh_type_annexation_form_view">
+        <field name="name">dh.transit.type.annexation.form</field>
+        <field name="model">dh.transit.type.annexation</field>
+        <field name="arch" type="xml">
+            <form string="Type Annexation">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="type_badr"/>
+                            <field name="type_puerto"/>
+                        </group>
+                        <group>
+                            <field name="docs_annexe"/>
+                            <field name="format_annexe"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+     <record model="ir.ui.view" id="dh_type_annexation_tree_view">
+        <field name="name">dh.transit.type.annexation.tree</field>
+        <field name="model">dh.transit.type.annexation</field>
+        <field name="arch" type="xml">
+            <tree string="Types Annexation">
+                <field name="type_badr"/>
+                <field name="type_puerto"/>
+                <field name="docs_annexe"/>
+                <field name="format_annexe"/>
+            </tree>
+        </field>
+    </record>
+
+	<record id="action_dh_type_annexation" model="ir.actions.act_window">
+		<field name="name">Types Annexation</field>
+		<field name="res_model">dh.transit.type.annexation</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+
+</odoo>

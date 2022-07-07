@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="dh_transit_terminal_form_view">
+        <field name="name">dh.transit.terminal.form</field>
+        <field name="model">dh.transit.terminal</field>
+        <field name="arch" type="xml">
+            <form string="Terminal">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="nom"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+     <record model="ir.ui.view" id="dh_transit_terminal_tree_view">
+        <field name="name">dh.transit.terminal.tree</field>
+        <field name="model">dh.transit.terminal</field>
+        <field name="arch" type="xml">
+            <tree string="Terminals">
+                <field name="nom"/>
+            </tree>
+        </field>
+    </record>
+
+	<record id="action_dh_transit_terminal" model="ir.actions.act_window">
+		<field name="name">Terminals</field>
+		<field name="res_model">dh.transit.terminal</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+
+</odoo>

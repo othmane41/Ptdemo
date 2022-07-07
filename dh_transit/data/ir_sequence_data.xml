@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<record id="seq_dossier" model="ir.sequence">
+			<field name="name">Dossier</field>
+			<field name="code">dh.transit.dossier</field>
+			<field name="prefix">DO</field>
+			<field name="padding">4</field>
+			<field name="implementation">standard</field>
+		</record>
+
+		<record id="seq_transit_facture" model="ir.sequence">
+			<field name="name">Facture</field>
+			<field name="code">dh.transit.facture</field>
+			<field name="suffix"> E</field>
+			<field name="padding">3</field>
+			<field name="implementation">standard</field>
+
+		</record>
+		<record id="seq_res_partner_client" model="ir.sequence">
+			<field name="name">Partner client</field>
+			<field name="code">res.partner.code.client</field>
+			<field name="prefix">C</field>
+			<field name="padding">4</field>
+			<field name="implementation">standard</field>
+
+		</record><record id="seq_res_partner_siege" model="ir.sequence">
+			<field name="name">Partner sage</field>
+			<field name="code">res.partner.code.sage</field>
+			<field name="prefix">S</field>
+			<field name="padding">4</field>
+			<field name="implementation">standard</field>
+		</record>
+
+
+
+
+	</data>
+</odoo>

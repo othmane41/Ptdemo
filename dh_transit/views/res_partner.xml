@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="dh_res_partner_form_view">
+        <field name="name">dh.res.partner</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <field name="country_id" position="after">
+                <field name="Ville_id" domain="[('dh_country_id', '=', country_id)]"/>
+            </field>
+            <field name="vat" position="after">
+                    <field name="code_client"/>
+                    <field name="type_client"/>
+                    <field name="ref_client"/>
+                    <field name="code_sage"/>
+                    <field name="raison_sociale"/>
+                    <field name="n_rc"/>
+                    <field name="n_centre_rc"/>
+                    <field name="ice"/>
+                    <field name="is_maritime"/>
+                    <field name="is_transporteur"/>
+                    <field name="is_soumissionnaire"/>
+                    <field name="categories_ids" widget="many2many_tags"/>
+            </field>
+            <field name="category_id" position="after">
+                    <field name="prestation" />
+                    <field name="reference" />
+                    <field name="secteur_activite"/>
+                    <field name="nbre_ops_prevues_mois"/>
+                    <field name="bureau_dedouanement"/>
+                    <field name="type_dedouanement"/>
+                    <field name="is_prestataire"/>
+                    <field name="is_producteur"/>
+            </field>
+            <xpath expr="//notebook/page[1]/field[@name='child_ids']/form/sheet/group[1]/group[1]/field[@name='name']" position="after">
+                <field name="interlocuteur_ids" widget="many2many_tags"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

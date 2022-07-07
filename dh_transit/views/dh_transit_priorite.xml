@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="dh_transit_priorite_form">
+        <field name="name">dh.transit.priorite.form</field>
+        <field name="model">dh.transit.priorite</field>
+        <field name="arch" type="xml">
+            <form string="Priorite">
+                <sheet>
+                        <group>
+                            <field name="priorite"/>
+                        </group>
+
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+     <record model="ir.ui.view" id="dh_transit_priorite_tree">
+        <field name="name">dh.transit.priorite.tree</field>
+        <field name="model">dh.transit.priorite</field>
+        <field name="arch" type="xml">
+            <tree string="Priorite">
+                <field name="priorite"/>
+
+            </tree>
+        </field>
+    </record>
+
+	<record id="action_dh_transit_priorite" model="ir.actions.act_window">
+		<field name="name">Priorite</field>
+		<field name="res_model">dh.transit.priorite</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+
+</odoo>

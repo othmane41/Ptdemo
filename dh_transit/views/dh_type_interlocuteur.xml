@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="dh_type_interlocuteur_form_view">
+        <field name="name">dh.type.interlocuteur.form</field>
+        <field name="model">dh.type.interlocuteur</field>
+        <field name="arch" type="xml">
+            <form string="Type interlocuteur">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="type"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+     <record model="ir.ui.view" id="dh_type_interlocuteur_tree_view">
+        <field name="name">dh.type.interlocuteur.tree</field>
+        <field name="model">dh.type.interlocuteur</field>
+        <field name="arch" type="xml">
+            <tree string="Types interlocuteur">
+                <field name="type"/>
+            </tree>
+        </field>
+    </record>
+
+	<record id="action_dh_type_interlocuteur" model="ir.actions.act_window">
+		<field name="name">Type interlocuteur</field>
+		<field name="res_model">dh.type.interlocuteur</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+
+</odoo>

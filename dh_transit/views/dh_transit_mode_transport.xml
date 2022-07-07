@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="dh_transit_mode_transport_form_view">
+        <field name="name">dh.transit.mode.transport.form</field>
+        <field name="model">dh.transit.mode.transport</field>
+        <field name="arch" type="xml">
+            <form string="Mode Transport">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="description"/>
+                            <field name="is_maritime"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Types Transport">
+                            <group>
+                                <field name="type_transport_ids" widget="many2many_tags">
+                                        <!--                                <tree>-->
+<!--                                    <field name="nom"/>-->
+<!--                                </tree>-->
+                                </field>
+                            </group>
+
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+     <record model="ir.ui.view" id="dh_transit_mode_transport_tree_view">
+        <field name="name">dh.transit.mode.transport.tree</field>
+        <field name="model">dh.transit.mode.transport</field>
+        <field name="arch" type="xml">
+            <tree string="Modes Transport">
+                <field name="name"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+	<record id="action_dh_transit_mode_transport" model="ir.actions.act_window">
+		<field name="name">Modes Transport</field>
+		<field name="res_model">dh.transit.mode.transport</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+
+</odoo>
