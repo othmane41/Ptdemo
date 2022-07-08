@@ -10,13 +10,19 @@
                       action="action_dh_transit_dossier"
                       sequence="1"/>
 
+        <menuitem id="db_transit_dossier_pivot"
+                      name="Analyse Dossiers"
+                      parent="db_transit_parent"
+                      action="action_dh_transit_dossier_pivot"
+                      sequence="2"/>
+
             <menuitem id="db_type_interlocuteur"
                       name="Type Interlocuteur"
                       parent="contacts.res_partner_menu_config"
                       action="action_dh_type_interlocuteur"
                       sequence="1"/>
 
-            <menuitem id="main_menu_configuration_menus" name="Configuration" parent="db_transit_parent" sequence="2"/>
+            <menuitem id="main_menu_configuration_menus" name="Configuration" parent="db_transit_parent" sequence="3"/>
                 <menuitem id="main_menu_douane" name="Dédouane" parent="main_menu_configuration_menus" sequence="1"/>
                     <menuitem id="main_menu_regimes" name="Régimes" parent="main_menu_douane" action="action_dh_transit_regime" sequence="1"/>
                     <menuitem id="main_menu_arrondissements" name="Arrondissements" parent="main_menu_douane" action="action_dh_transit_arrondissement" sequence="2"/>
